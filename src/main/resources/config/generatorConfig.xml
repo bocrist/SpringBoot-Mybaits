@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1">
+    <jdbcConnection connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:ORCL" driverClass="oracle.jdbc.driver.OracleDriver" password="123456" userId="system" />
+    <javaModelGenerator targetPackage="cn.bocrist.entity" targetProject="SpringBoot/src/main/java" />
+    <sqlMapGenerator targetPackage="mapper" targetProject="SpringBoot/src/main/resources" />
+    <javaClientGenerator targetPackage="cn.bocrist.dao" targetProject="SpringBoot/src/main/java" type="XMLMAPPER" />
+    <table  tableName="bootuser">
+      <columnOverride column="id" property="id" />
+      <columnOverride column="bootid" property="bootid" />
+      <columnOverride column="bootname" property="bootname" />
+      <columnOverride column="bootage" property="bootage" />
+      <columnOverride column="bootsex" property="bootsex" />
+      <columnOverride column="bootbirthday" property="bootbirthday" javaType="java.sql.Date"/>
+    </table>
+  </context>
+</generatorConfiguration>
