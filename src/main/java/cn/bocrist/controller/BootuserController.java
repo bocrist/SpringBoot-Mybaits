@@ -6,8 +6,15 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
@@ -15,36 +22,43 @@ import com.github.pagehelper.PageInfo;
 
 import cn.bocrist.entity.Bootuser;
 import cn.bocrist.service.BootuserService;
-@Controller
+import io.swagger.annotations.ApiOperation;
+@RestController
 @RequestMapping("")
 public class BootuserController {
 	@Autowired
 	private BootuserService bootuserservice;
 	
 	@RequestMapping("/")
-	public String showIndex(){
-	    return "index";
+	public ModelAndView showIndex(){
+		  ModelAndView mv = new ModelAndView("index"); 
+	        return mv; 
 	}
 	
-	@RequestMapping("/del")
-	public String deleteByPrimaryKey(Short id) {
+	@ApiOperation("删除")
+	@RequestMapping(value = "/del", method = RequestMethod.DELETE)
+	public ModelAndView deleteByPrimaryKey(@RequestParam(value="id")  Short id) {
 		bootuserservice.deleteByPrimaryKey(id);
-		return "redirect:list";	
+		 ModelAndView mv = new ModelAndView("redirect:/list"); 
+	        return mv; 
 	}
 	
 	@RequestMapping("/add")
-    public String add() {   
-        return "add";
+    public ModelAndView add() {   
+		 ModelAndView mv = new ModelAndView("add"); 
+	        return mv; 
     }
 	
-	@RequestMapping("/insert")
-	public String insert(Bootuser record) {
+  
+	@PostMapping("insert")
+	public ModelAndView insert(Bootuser record) {
 		bootuserservice.insert(record);
-		return "redirect:list";		
+		 ModelAndView mv = new ModelAndView("redirect:/list"); 
+	        return mv; 	
 	}
 	
-	@RequestMapping("/list")
-	public String selectByExample(HttpServletRequest request,@RequestParam(defaultValue = "1",value = "pageNum") Integer pageNum){
+	@RequestMapping(value = "list",method ={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView selectByExample(HttpServletRequest request,@RequestParam(defaultValue = "1",value = "pageNum") Integer pageNum){
 		    String bootname=request.getParameter("search");
 		    if (bootname == null)
 	        {
@@ -53,8 +67,12 @@ public class BootuserController {
 	        PageHelper.startPage(pageNum,5);
 	        List<Bootuser> list = bootuserservice.selectByExample(bootname);
 	        PageInfo<Bootuser> pageInfo = new PageInfo<Bootuser>(list);
-	        request.setAttribute("pageInfo",pageInfo);
-	        return "list";
+	     
+	       request.setAttribute("pageInfo",pageInfo);
+	        ModelAndView mv = new ModelAndView("list");
+	 
+			return mv;	
+	  
 	    }
 	
 	@RequestMapping("/edit")
@@ -65,10 +83,11 @@ public class BootuserController {
         return mav;
     }
 	
-	@RequestMapping("/update")
-	public String updateByPrimaryKeySelective(Bootuser record) {
+	@RequestMapping(value = "/update", method = RequestMethod.PUT)
+	public ModelAndView  updateByPrimaryKeySelective(Bootuser record) {
 		bootuserservice.updateByPrimaryKeySelective(record);
-		return "redirect:list";
+		 ModelAndView mv = new ModelAndView("redirect:/list"); 
+	        return mv; 
 	}
 
 

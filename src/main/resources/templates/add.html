@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-         pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -15,11 +12,11 @@
             <h3 class="panel-title">增加人员</h3>
         </div>
         <div class="panel-body">
- <form method="post" action="insert" role="form">
+ <form method="post" th:action="@{/insert}" role="form">
                 <table class="addTable">
                     <tr>
                         <td>编号：</td>
-                        <td><input type="text" name="bootid" id="bootid" placeholder="请在这里输入编号"></td>
+                        <td><input type="text"  name="bootid" id="bootid" placeholder="请在这里输入编号"></td>
                     </tr>
                     <tr>
                         <td>姓名：</td>
