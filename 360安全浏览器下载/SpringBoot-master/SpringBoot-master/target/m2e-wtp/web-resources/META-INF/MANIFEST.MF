@@ -4,7 +4,6 @@ Implementation-Version: 0.0.1-SNAPSHOT
 Built-By: bernie
 Implementation-Vendor-Id: cn.bocrist
 Build-Jdk: 1.8.0_211
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/SpringBoot
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot-starter-parent/SpringBoot
 Created-By: Maven Integration for Eclipse
 
