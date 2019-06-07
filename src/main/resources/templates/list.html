@@ -66,21 +66,11 @@
 
         </tbody>
 
-
-
-
-
-
-
-
-
-
-    
     </table>
 </div>
 <nav class="pageDIV">
     <ul class="pagination">
-  <c:forEach th:each="itema : ${pageInfo}">
+  <tr th:each="itema : ${pageInfo}">
 <p>当前<a th:text="${itema.pageNum}"></a>页,总 <a th:text="${itema.pages}"></a>页,总 <a th:text="${itema.total}"></a> 条记录</div></p>
         <a href="list?pageNum=1">首页</a>
         <a th:if="${itema.hasPreviousPage }">
@@ -93,7 +83,7 @@
         </a>
          <a th:href="@{/list(pageNum=${itema.pages},ttt=3)}">末页</a>
       
-    </c:forEach>
+    </tr>
 </ul>
 </nav>
 
